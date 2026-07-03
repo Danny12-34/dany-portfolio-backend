@@ -1,25 +1,36 @@
 // server.js
-const express = require('express');
-const cors = require('cors');
-require('dotenv').config();
 
-const portfolioRoutes = require('./routes/portfolioRoutes');
+// This specific syntax forces dotenv to load BEFORE any other imports are processed
+import 'dotenv/config'; 
+
+import express from "express";
+import cors from "cors";
+
+import profileRoutes from "./routes/profileRoutes.js";
+import skillsRoutes from "./routes/skillsRoutes.js";
+import educationRoutes from "./routes/educationRoutes.js";
+import experienceRoutes from "./routes/experienceRoutes.js";
+import projectsRoutes from "./routes/projectsRoutes.js";
+import certificationsRoutes from "./routes/certificationsRoutes.js";
+import languagesRoutes from "./routes/languagesRoutes.js";
+import referencesRoutes from "./routes/referencesRoutes.js";
 
 const app = express();
-const PORT = process.env.PORT || 5000;
 
-// Enable CORS so your separate frontend can fetch data without being blocked by the browser
 app.use(cors());
 app.use(express.json());
 
-// Bind our CRUD endpoints 
-app.use('/api/portfolio', portfolioRoutes);
+app.use("/api/profile", profileRoutes);
+app.use("/api/skills", skillsRoutes);
+app.use("/api/education", educationRoutes);
+app.use("/api/experience", experienceRoutes);
+app.use("/api/projects", projectsRoutes);
+app.use("/api/certifications", certificationsRoutes);
+app.use("/api/languages", languagesRoutes);
+app.use("/api/references", referencesRoutes);
 
-app.use((req, res) => {
-    res.status(404).json({ success: false, message: 'API Route Not Found' });
-});
+const PORT = process.env.PORT || 5000;
 
-// This code activates the network listener process
 app.listen(PORT, () => {
-    console.log(`🚀 Isolated Backend Server running smoothly on port ${PORT}`);
+  console.log(`Server running on port ${PORT}`);
 });

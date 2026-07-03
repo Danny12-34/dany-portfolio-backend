@@ -1,16 +1,16 @@
 // config/db.js
-const { createClient } = require('@supabase/supabase-js');
-require('dotenv').config();
+import pg from 'pg';
+const { Pool } = pg;
 
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
+const isProduction = process.env.NODE_ENV === 'production';
 
-if (!supabaseUrl || !supabaseKey) {
-    console.error('CRITICAL ERROR: Missing Supabase environment keys inside .env configuration!');
-    process.exit(1);
-}
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  // If we have a DATABASE_URL and it's a cloud DB, configuration is required
+  ssl: {
+    // This bypasses the self-signed certificate error
+    rejectUnauthorized: false 
+  }
+});
 
-// This line initializes the connection client instance
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-module.exports = supabase; // Exported to be reused by controllers for CRUD operations
+export default pool;
