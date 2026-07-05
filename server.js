@@ -14,6 +14,7 @@ import projectsRoutes from "./routes/projectsRoutes.js";
 import certificationsRoutes from "./routes/certificationsRoutes.js";
 import languagesRoutes from "./routes/languagesRoutes.js";
 import referencesRoutes from "./routes/referencesRoutes.js";
+import otherDocumentsRoutes from "./routes/otherDocumentsRoutes.js";
 
 const app = express();
 
@@ -28,6 +29,7 @@ app.use("/api/projects", projectsRoutes);
 app.use("/api/certifications", certificationsRoutes);
 app.use("/api/languages", languagesRoutes);
 app.use("/api/references", referencesRoutes);
+app.use("/api/otherdocuments", otherDocumentsRoutes);
 
 const PORT = process.env.PORT || 5000;
 
