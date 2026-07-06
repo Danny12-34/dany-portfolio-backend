@@ -20,6 +20,7 @@ const app = express();
 
 // Configure CORS to trust your live Vercel frontend and local development
 const allowedOrigins = [
+  "https://dannyportfolio.gkminvest.com",
   "https://dany-portfolio-frontend-b8td.vercel.app",
   "http://localhost:3000"
 ];
